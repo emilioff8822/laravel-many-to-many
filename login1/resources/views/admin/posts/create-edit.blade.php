@@ -42,7 +42,9 @@
 
                     @foreach ($tags as $tag)
                         <input type="checkbox" class="btn-check" id="tag{{ $loop->iteration }}" autocomplete="off"
-                            value="{{ $tag->id }}" name="tags[]" checked>
+                            value="{{ $tag->id }}" name="tags[]"
+                            @if (!$errors->any() && $post?->tags->contains($tag)) checked @elseif ($errors->any() && in_array($tag->id, old('tags', []))) checked @endif
+                            @if (in_array($tag->id, old('tags', []))) cheked @endif>
                         <label class="btn btn-outline-dark" for="tag{{ $loop->iteration }}">{{ $tag->name }}</label>
                     @endforeach
 

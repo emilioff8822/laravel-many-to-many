@@ -133,11 +133,12 @@ class PostController extends Controller
     public function edit(Post $post)
     {
                 $categories = Category::all();
+        $tags = Tag::all();
 
         $title = "Modifica di: " . $post->title;
         $method = 'PUT';
         $route = route('admin.posts.update', $post);
-        return view('admin.posts.create-edit', compact('title', 'method', 'route', 'post' ,'categories'));
+        return view('admin.posts.create-edit', compact('title', 'method', 'route', 'post' ,'categories', 'tags'));
     }
 
     /**
@@ -176,6 +177,17 @@ class PostController extends Controller
         }
 
         $post->update($form_data);
+         if(array_key_exists('tags', $form_data)){
+        // se esiste la chiave  sincronizzo con i nuovi dati la tabella pivot
+        $post->tags()->sync($form_data['tags']);
+        }else{
+            //se non selezione nessun tag nelle checkbox quindi non e risptata array_key_exist elimina tutte le relazioni
+            $post->tags()->detach();
+        }
+
+
+
+
         return redirect()->route('admin.posts.show', $post);
 
 
