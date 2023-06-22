@@ -79,9 +79,14 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
-        //
+        $val_data = $request->validate(
+            [ "name" => 'required|unique:categories|max:50']);
+
+        $val_data['slug'] = Str::slug($val_data['name']);
+        $tag->update($val_data);
+        return redirect()->back()->with('message', "Tag $tag->name aggiornato correttamente ");
     }
 
     /**

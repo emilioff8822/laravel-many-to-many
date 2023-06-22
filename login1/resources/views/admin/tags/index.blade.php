@@ -50,7 +50,8 @@
                 @foreach ($tags as $tag)
                     <tr>
                         <td>
-                            <form action="{{ route('admin.tags.update', $tag) }}" method="POST" id="edit_form">
+                            <form action="{{ route('admin.tags.update', $tag) }}" method="POST"
+                                id="edit_form{{ $tag->id }}">
                                 @csrf
                                 @method('PUT')
                                 <input class="border-0" name="name" type="text" value="{{ $tag->name }}">
@@ -58,7 +59,7 @@
                             </form>
                         </td>
                         <td>
-                            <button class="btn btn-success" onclick="submitEditForm()">Salva</button>
+                            <button class="btn btn-success" onclick="submitEditForm({{ $tag->id }})">Salva</button>
                             @include('admin.partials.form-delete', [
                                 'title' => 'Eliminazione Tag',
                                 'id' => $tag->id,
@@ -78,8 +79,9 @@
     </div>
 
     <script>
-        function submitEditForm() {
-            const form = document.getElementById('edit_form');
+        function submitEditForm(id) {
+
+            const form = document.getElementById('edit_form' + id);
             form.submit();
         }
     </script>
