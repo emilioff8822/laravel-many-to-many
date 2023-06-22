@@ -34,9 +34,9 @@
                     @else
                         <li class="nav-item dropdown d-flex">
 
-                            <form action="#" class="d-flex">
+                            <form action="{{ route('admin.posts.index') }}" class="d-flex" method="GET">
                                 <input type="text" class="form-control me-2" name="search" type="text"
-                                    placeholder="Cerca">
+                                    placeholder="Post da cercare">
                                 <button class="btn btn-primary me-3"><i class="fa fa-search"></i></button>
 
 

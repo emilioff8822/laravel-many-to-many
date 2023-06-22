@@ -18,9 +18,30 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $direction = 'asc';
-        $posts= Post::orderBy('id', $direction)->paginate(10);
+
+    {     $direction = 'asc';
+
+
+        //verifico  se ci sono dati in GET, quindi se e' presente la variabile search in Get
+        // se c'e' faccio la query con LIKE
+        //se non ce faccio query base
+
+        if(isset($_GET['search'])){
+        $tosearch= $_GET['search'];
+
+            $posts = Post::where('title', 'like', "%$tosearch%")
+                ->paginate(10);
+
+
+
+        }else{
+
+            $posts= Post::orderBy('id', $direction)->paginate(10);
+
+
+
+        }
+
         return view('admin.posts.index', compact('posts','direction'));
     }
 
