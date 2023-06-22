@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('categories', CategoryController::class);// gli do il nome della tabella, categories
         Route::get('orderby/{direction}', [PostController::class, 'orderby'])->name('orderby');
         Route::get('category-posts}', [PostController::class, 'categoryPosts'])->name('category_posts');
+        Route::get('tag-posts}', [PostController::class, 'tagsPosts'])->name('tags_posts');
 
 });
 

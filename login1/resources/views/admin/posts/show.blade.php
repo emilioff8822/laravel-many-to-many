@@ -17,9 +17,22 @@
 
         <p>{{ $date_formatted }}</p>
         <div>
-            <span class="badge text-bg-warning">{{ $post->category?->name }}</span>
+            <strong>Categoria:</strong><span class="badge text-bg-warning">{{ $post->category?->name }}</span>
+        </div>
+
+        <div>
+            <strong>Tag:</strong>
+            @forelse ($post->tags as $tag)
+                <span class="badge text-bg-dark">{{ $tag->name }}</span>
+
+            @empty
+                <span class="badge text-bg-light">Null</span>
+            @endforelse
+
+
 
         </div>
+
         <p>{!! $post->text !!}</p>
         <div>
             <img width="50%" src="{{ asset('storage/' . $post->image_path) }}" alt="{{ $post->title }}">

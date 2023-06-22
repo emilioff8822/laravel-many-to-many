@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -34,6 +35,16 @@ class PostController extends Controller
         $categories = Category::all();
         return view('admin.posts.category-posts' , compact ('categories'));
     }
+
+    public function tagsPosts(){
+
+        $tags = Tag::all();
+        return view('admin.posts.tag-posts', compact('tags'));
+
+
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
