@@ -29,10 +29,11 @@ class Post extends Model
     //restiuitsco che apprtiene alla categoria
 
         return $this->belongsTo(Category::class);
+}
 
-
-
-    }
+        public function tags() {
+        return $this->belongsToMany(Tag::class);
+        }
     public static function generateSlug($str){
 
         $slug = Str::slug($str, '-');

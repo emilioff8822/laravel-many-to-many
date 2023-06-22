@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
                     CategoryTableSeeder::class,
+                    TagsTableSeeder::class,
+
                     PostsTableSeeder::class //in produzione commentare questo seeder
 
     ]);

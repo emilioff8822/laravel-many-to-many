@@ -6,7 +6,12 @@
         <h2 class="fs-4 text-secondary my-4 ">
             {{ $post->title }}
             <td><a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-success">Modfica</a></td>
-            @include('admin.partials.form-delete')
+            @include('admin.partials.form-delete', [
+                'title' => 'Eliminazione Post',
+                'id' => $post->id,
+                'message' => "Confermi l'eliminazione del post {$post->title}?",
+                'route' => route('admin.posts.destroy', $post),
+            ])
 
         </h2>
 
