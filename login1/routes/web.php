@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('home');
         Route::resource('posts', PostController::class);
         Route::resource('categories', CategoryController::class);// gli do il nome della tabella, categories
+        Route::resource('tags', TagController::class);
         Route::get('orderby/{direction}', [PostController::class, 'orderby'])->name('orderby');
         Route::get('category-posts}', [PostController::class, 'categoryPosts'])->name('category_posts');
         Route::get('tag-posts}', [PostController::class, 'tagsPosts'])->name('tags_posts');
