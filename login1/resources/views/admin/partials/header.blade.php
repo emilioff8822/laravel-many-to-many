@@ -32,7 +32,17 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown d-flex">
+
+                            <form action="#" class="d-flex">
+                                <input type="text" class="form-control me-2" name="search" type="text"
+                                    placeholder="Cerca">
+                                <button class="btn btn-primary me-3"><i class="fa fa-search"></i></button>
+
+
+                            </form>
+
+
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button class="btn btn-secondary" type="submit">
