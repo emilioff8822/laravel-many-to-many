@@ -202,6 +202,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+
+        //se nella migration non ho messo cascadeOn delete devo fare
+        //$post->tags()->detach;
+
         //se il post da eliminare contiene un immagine la devo cancellare dalla cartella
         if($post->image_path){
                 Storage::disk('public')->delete($post->image_path);
