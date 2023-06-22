@@ -37,7 +37,28 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="title" class="form-label">Categorie</label>
+                <p for="title" class="form-label">Tag</p>
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+                    @foreach ($tags as $tag)
+                        <input type="checkbox" class="btn-check" id="tag{{ $loop->iteration }}" autocomplete="off"
+                            value="{{ $tag->id }}" name="tags[]" checked>
+                        <label class="btn btn-outline-dark" for="tag{{ $loop->iteration }}">{{ $tag->name }}</label>
+                    @endforeach
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+            <div class="mb-3">
+                <p for="title" class="form-label">Tag</p>
+
                 <select class="form-select" name="category_id">
                     <option value="">Selezionare una categoria</option>
                     @foreach ($categories as $category)
@@ -48,6 +69,9 @@
 
 
                 </select>
+
+
+
 
             </div>
 

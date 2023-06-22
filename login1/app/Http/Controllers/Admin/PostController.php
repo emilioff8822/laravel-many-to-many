@@ -54,13 +54,14 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
         $title = 'Creazione di un nuovo post';
         $method = 'POST';
         $route = route('admin.posts.store');
         //post glielo passo come null quindi nell'old non puo esistere title
         $post = null;
 
-        return view('admin.posts.create-edit', compact('title', 'method', 'route', 'post', 'categories'));
+        return view('admin.posts.create-edit', compact('title', 'method', 'route', 'post', 'categories' , 'tags'));
     }
 
     /**
@@ -87,10 +88,20 @@ class PostController extends Controller
 
         }
 
-        $new_post = new Post();
-        $new_post->fill($form_data);
+       // $new_post = new Post();
+        //$new_post->fill($form_data);
+        //$new_post->save();
 
-        $new_post->save();
+        // i tre comandi sopra possono essere riassunti con create che crea nuova entita fa fill e poi save tutto in
+        $new_post = Post::create($form_data);
+
+        // facciamol'operazione di verfica se esiste la chiave per l'edit-create
+        // se ho inviato almeno un tag (tags e' un array)
+
+        if(array_key_exists('tags', $form_data)){
+            //attacco al post appena creato l'array dei tags proveniente dal form
+            $new_post->tags()->attach($form_data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $new_post);
 
